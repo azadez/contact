@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+<p th:text="'Hello your value is, ' + ${id} + '!'" />
+<form action="#" th:action="@{/update}" th:object="${personForm}" method="post">
+    <table>
+        <tr>
+            <td>Name:</td>
+            <td><input type="text" th:field="*{name}" /></td>
+            <td th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</td>
+        </tr>
+        <tr>
+            <td>lastname:</td>
+            <td><input type="text" th:field="*{lastname}" /></td>
+            <td th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}">lastname Error</td>
+        </tr>
+        <tr>
+            <td><button type="submit">Submit</button></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

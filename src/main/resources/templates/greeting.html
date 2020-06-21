@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script type='text/javascript'>
+        function voirAdresse(a){
+            window.location.replace("../adresses?id=" + a);
+        }
+        function modifierContact(a){
+            window.location.replace("../update?id=" + a);
+        }
+        function supprimerContact(e){
+            window.location.replace("../delete?id=" + e);
+        }
+    </script>
+</head>
+<body>
+<style>
+    table,
+td {
+    border: 1px solid #333;
+}
+thead,
+tfoot {
+    background-color: #333;
+    color: #fff;
+}
+</style>
+<h1> Liste des contacts</h1>
+<table >
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Prénom</th>
+        <th>Nom</th>
+        <th>Supprimer le contact</th>
+        <th>Modifier le contact</th>
+        <th>Accéder aux adresses</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="c : ${contacts}">
+        <td th:text="${c.id}">...</td>
+        <td th:text="${c.firstName}">...</td>
+        <td th:text="${c.lastName}">...</td>
+        <td align="center">
+            <a th:onclick="'javascript:supprimerContact(\''+ ${c.id} + '\');'">
+                <button type="button">
+                    Supprimer
+                </button>
+            </a>
+        </td>
+        <td align="center">
+            <a th:onclick="'javascript:modifierContact(\''+ ${c.id} + '\');'">
+                <button type="button">
+                    Modifier
+                </button>
+            </a>
+        </td>
+        <td align="center">
+            <a th:onclick="'javascript:voirAdresse(\''+ ${c.id} + '\');'">
+                <button type="button">
+                    Voir Adresse
+                </button>
+            </a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

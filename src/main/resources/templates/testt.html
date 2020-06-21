@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<script type='text/javascript'>
+        function addAddressField() {
+            var addressesDiv = document.getElementById("fields");
+            var divFields = document.createElement("div");
+            var input = document.createElement("input");
+            input.setAttribute("type", "text");
+            input.setAttribute("name", "addresses");
+            divFields.appendChild(input);
+            addressesDiv.appendChild(divFields);
+        }
+        </script>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="#" th:action="@{/testt}"  method="post">
+
+    Ajouter vos adresse(s)<br>
+    <div id="fields">
+        <input type="text" name="addresses">
+    </div>
+
+    <input type="Submit" >Enregistrer les adresses</input>
+
+</form>
+<button onclick="addAddressField()" >Ajouter une ligne</button>
+</body>
+</html>
