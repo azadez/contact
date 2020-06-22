@@ -14,7 +14,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
-import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import javax.validation.Valid;
@@ -153,10 +152,11 @@ public class GreetingController implements WebMvcConfigurer {
             , @RequestParam(value = "id", required = false, defaultValue = "-1") String x, Model model,
                          @RequestParam(value = "action", required = false, defaultValue = "custo") String action) {
         if (action.equals("custo")) {
-            data.deleteById(Long.parseLong(x));
+            if (data.existsById(Long.parseLong(x))) data.deleteById(Long.parseLong(x));
             return "redirect:/greeting";
         }
         if (action.equals("adresse")) {
+
             Customer c = data.findById(Long.parseLong(x.split(",")[1]));
             c.getAdresses().remove(data2.findById(Long.parseLong(x.split(",")[0])));
             data.save(c);
@@ -192,7 +192,10 @@ public class GreetingController implements WebMvcConfigurer {
     @PostMapping("/createemail")
     public String postcreateemail(@RequestParam(name = "emails") List<String> emails) {
         for (String s : emails) {
-            data3.save(new Email(s));
+            try {
+                data3.save(new Email(s));
+            } catch (Exception e) {
+            }
         }
         return "redirect:/greeting";
     }
@@ -267,8 +270,12 @@ public class GreetingController implements WebMvcConfigurer {
     @PostMapping("/inject/email")
     public ResponseEntity<Email> injectemail(@RequestBody Email email) {
         try {
-            Email _email = data3.save(new Email(email.getEmail()));
-            return new ResponseEntity<>(_email, HttpStatus.CREATED);
+            try {
+                Email _email = data3.save(new Email(email.getMail()));
+                return new ResponseEntity<>(_email, HttpStatus.CREATED);
+            } catch (Exception e) {
+                return new ResponseEntity<>(null, HttpStatus.CREATED);
+            }
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.CREATED);
         }

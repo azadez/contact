@@ -15,8 +15,8 @@ public class Email {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
 
-    @Column(unique = true)
-    private String Email;
+    @Column(name = "Mail", unique = true)
+    private String Mail;
 
 
     @ManyToOne
@@ -34,24 +34,25 @@ public class Email {
     public void setId(Long id) {
         this.id = id;
     }
-    @XmlElement
-    public String getEmail() {
-        return Email;
-    }
-
-    public void setEmail(String email) {
-        Email = email;
-    }
 
     public Email(String Email) {
-        this.Email = Email.replace(",","");
+        this.Mail = Email.replace(",", "");
+    }
+
+    @XmlElement
+    public String getMail() {
+        return Mail;
+    }
+
+    public void setMail(String mail) {
+        Mail = mail;
     }
 
     @Override
     public String toString() {
         return String.format(
                 "Email[id=%d, Email='%s']",
-                id, Email);
+                id, Mail);
     }
     @XmlTransient
     public Customer getCustomer() {
