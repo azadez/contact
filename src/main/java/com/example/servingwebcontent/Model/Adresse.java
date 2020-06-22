@@ -15,21 +15,19 @@ public class Adresse {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
     private String Adresse;
-    private String CP;
-    private String ville;
 
 
     protected Adresse() {}
 
-    public Adresse(String Adresse,String CP,String ville) {
-        this.Adresse = Adresse; this.CP=CP;this.ville=ville;
+    public Adresse(String Adresse) {
+        this.Adresse = Adresse;
     }
 
     @Override
     public String toString() {
         return String.format(
-                "Adresse[id=%d, Adresse='%s', CP='%s', ville='%s']",
-                id, Adresse,CP,ville);
+                "Adresse[id=%d, Adresse='%s']",
+                id, Adresse);
     }
 
     @XmlElement
@@ -39,12 +37,6 @@ public class Adresse {
     @XmlElement
     public String getAdresse() {
         return Adresse;
-    }
-    @XmlElement
-    public String getCP(){return CP;}
-    @XmlElement
-    public String getVille() {
-        return ville;
     }
 
 
@@ -56,12 +48,4 @@ public class Adresse {
         Adresse = adresse;
     }
 
-    public void setCP(String CP) {
-        this.CP = CP;
-    }
-
-
-    public void setVille(String ville) {
-        this.ville = ville;
-    }
 }

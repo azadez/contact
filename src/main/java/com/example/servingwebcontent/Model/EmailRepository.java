@@ -9,7 +9,7 @@ public interface EmailRepository extends CrudRepository<Email, Long> {
     Email findById(long id);
 
 
-    List<Email> findBycustomer(long id);
+    List<Email> findBycustomer(Long id);
 
     List<Email> findAll();
 

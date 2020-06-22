@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+</head>
+<body>
+</form>
+<form action="#" method="post" th:action="@{/addemail}" th:object="${emailForm}">
+    <select multiple size="5" th:field="*{email}">
+        <option th:each="c : ${email}"
+                th:text="${c.email}"
+                th:value="${c.id}"/>
+    </select>
+    <br>
+    <td>
+        <button type="submit">Submit</button>
+    </td>
+</form>
+</body>
+</html>

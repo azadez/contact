@@ -3,13 +3,25 @@
 <head>
     <script type='text/javascript'>
         function voirAdresse(a){
-            window.location.replace("../adresses?id=" + a);
+            window.location.replace("../adressesemails?id=" + a);
         }
         function modifierContact(a){
             window.location.replace("../update?id=" + a);
         }
         function supprimerContact(e){
             window.location.replace("../delete?id=" + e);
+        }
+        function addcusto(){
+            window.location.replace("../add");
+        }
+        function createad(){
+            window.location.replace("../createadresse");
+        }
+        function createem(){
+            window.location.replace("../createemail");
+        }
+        function logout(){
+            window.location.replace("../logout");
         }
     </script>
 </head>
@@ -34,7 +46,7 @@ tfoot {
         <th>Nom</th>
         <th>Supprimer le contact</th>
         <th>Modifier le contact</th>
-        <th>Accéder aux adresses</th>
+        <th>Accéder aux adresses et mail</th>
     </tr>
     </thead>
     <tbody>
@@ -59,12 +71,34 @@ tfoot {
         <td align="center">
             <a th:onclick="'javascript:voirAdresse(\''+ ${c.id} + '\');'">
                 <button type="button">
-                    Voir Adresse
+                    Voir Adresse et email
                 </button>
             </a>
         </td>
     </tr>
     </tbody>
 </table>
+<br>
+<br>
+<a th:onclick="'javascript:addcusto();'">
+    <button type="button">
+        Ajouter un contact
+    </button>
+</a>
+<a th:onclick="'javascript:createad();'">
+    <button type="button">
+        Créer des adresses
+    </button>
+</a>
+<a th:onclick="'javascript:createem();'">
+    <button type="button">
+        Créer des emails
+    </button>
+</a>
+<a th:onclick="'javascript:logout();'">
+    <button type="button">
+        LogOut
+    </button>
+</a>
 </body>
 </html>

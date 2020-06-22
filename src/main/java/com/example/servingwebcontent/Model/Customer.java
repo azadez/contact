@@ -69,7 +69,7 @@ public class Customer implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
-    @XmlTransient
+
     public Collection<Adresse> getAdresses() {
         return adresses;
     }
@@ -77,7 +77,7 @@ public class Customer implements Serializable {
     public void setAdresses(Collection<Adresse> adresses) {
         this.adresses = adresses;
     }
-    @XmlTransient
+
     public Collection<Email> getEmails() {
         return emails;
     }

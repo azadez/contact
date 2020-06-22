@@ -22,7 +22,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers( "/greeting").permitAll()
+                .antMatchers("/greeting", "/", "/adressesemails*").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -43,7 +43,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        user.save(new User("user","test"));
+        if (user.findByLogin("user") == null) user.save(new User("user", "test"));
         auth.inMemoryAuthentication()
                 .passwordEncoder(passwordEncoder())
                 .withUser("user").password(user.findByLogin("user").getPassword()).roles("USER");

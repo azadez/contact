@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+</head>
+<body>
+
+
+</form>
+<form action="#" method="post" th:action="@{/addadresse}" th:object="${adresseForm}">
+    <select multiple size="5" th:field="*{adresse}">
+        <option th:each="c : ${adresse}"
+                th:text="${c.adresse}"
+                th:value="${c.id}"/>
+    </select>
+    <br>
+    <td>
+        <button type="submit">Submit</button>
+    </td>
+</form>
+
+
+</body>
+</html>

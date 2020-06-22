@@ -1,6 +1,7 @@
 package com.example.servingwebcontent;
 
 import com.example.servingwebcontent.Model.*;
+import com.sun.tools.javac.util.Iterators;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -8,30 +9,12 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 @SpringBootApplication
 @EnableAutoConfiguration
 public class ServingWebContentApplication implements CommandLineRunner {
-    Customer HOMER = new Customer("Homer","simpson");
-    Customer LISA = new Customer("Lisa","simpson");
-    Customer BARTH = new Customer("Barth","simpson");
-    Customer MARGE = new Customer("Marge","simpson");
-    Customer MAGGY = new Customer("Maggy","simpson");
-    Adresse Ad1 = new Adresse("15 rue de champagne", "67000", "Reims");
-    Adresse Ad2 = new Adresse("1 avenue du général leclerc" ,"54500" ,"vandoeuvre");
-    Adresse Ad3 = new Adresse("66 rue jean jaurès", "54000", "nancy");
-    Adresse Ad4 = new Adresse("Place des champs élyssé","93000","Paris");
-    Adresse Ad5 = new Adresse("Place Stanylas","93000","Paris");
-    Email Em1 = new Email("hugo.malglaive@gmail.com");
-    Email Em2= new Email("hugo.robert@gmail.com");
-    Email Em3 = new Email("raphael.carlier@lecnam.net");
-    Email Em4 = new Email("emmanuel.macron@gouv.fr");
-    Email Em5 = new Email("huguel.malglaive@gmail.com");
-    List<Customer> GENS = Arrays.asList(HOMER,LISA,BARTH,MAGGY,MARGE);
-    List<Adresse> ADRESSE = Arrays.asList(Ad1,Ad2,Ad3,Ad4,Ad5);
-    List<Email> EMAIL = Arrays.asList(Em1,Em2,Em3,Em4,Em5);
-
     @Autowired
     CustomerRepository data;
     @Autowired
@@ -41,15 +24,30 @@ public class ServingWebContentApplication implements CommandLineRunner {
     @Autowired
     UserRepository data4;
 
-
-
-
     public static void main(String[] args) {
         SpringApplication.run(ServingWebContentApplication.class, args);
     }
 
-    @Override
-    public void run(String... args) throws Exception {
+    public void init() {
+        Customer HOMER = new Customer("Homer", "simpson");
+        Customer LISA = new Customer("Lisa", "simpson");
+        Customer BARTH = new Customer("Barth", "simpson");
+        Customer MARGE = new Customer("Marge", "simpson");
+        Customer MAGGY = new Customer("Maggy", "simpson");
+        Adresse Ad1 = new Adresse("15 rue de champagne 67000 Reims");
+        Adresse Ad2 = new Adresse("1 avenue du général leclerc 54500 vandoeuvre");
+        Adresse Ad3 = new Adresse("66 rue jean jaurès 54000 nancy");
+        Adresse Ad4 = new Adresse("Place des champs élyssé 93000 Paris");
+        Adresse Ad5 = new Adresse("Place Stanylas 93000 Paris");
+        Email Em1 = new Email("hugo.malglaive@gmail.com");
+        Email Em2 = new Email("hugo.robert@gmail.com");
+        Email Em3 = new Email("raphael.carlier@lecnam.net");
+        Email Em4 = new Email("emmanuel.macron@gouv.fr");
+        Email Em5 = new Email("huguel.malglaive@gmail.com");
+        Email Em6 = new Email("huguerfedl.malglaive@gmail.com");
+        List<Customer> GENS = Arrays.asList(HOMER, LISA, BARTH, MAGGY, MARGE);
+        List<Adresse> ADRESSE = Arrays.asList(Ad1, Ad2, Ad3, Ad4, Ad5);
+        List<Email> EMAIL = Arrays.asList(Em1, Em2, Em3, Em4, Em5, Em6);
         data.saveAll(GENS);
         data2.saveAll(ADRESSE);
         data3.saveAll(EMAIL);
@@ -74,10 +72,12 @@ public class ServingWebContentApplication implements CommandLineRunner {
         e = data3.findById(13L);
         e.setCustomer(data.findById(2L));
         data3.save(e);
+    }
 
-
-
-
+    @Override
+    public void run(String... args) throws Exception {
+        if (!data.findAll().iterator().hasNext() && !data2.findAll().iterator().hasNext() && !data3.findAll().iterator().hasNext())
+            init();
     }
 
 

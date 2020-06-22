@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script type='text/javascript'>
+        function supprimeradresse(a,b){
+            window.location.replace("../delete?action=adresse&id=" + a+","+b);
+        }
+        function supprimeremail(a,b){
+            window.location.replace("../delete?action=email&id=" + a+","+b);
+        }
+        function ajouteradresse(c){
+            window.location.replace("../update?action=adresse&id=" + c);
+        }
+        function ajouteremail(d){
+            window.location.replace("../update?action=email&id=" + d);
+        }
+        function goaccueil(){
+            window.location.replace("../greeting");
+        }
+
+
+
+    </script>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<h1 th:text="'Liste des adresses et mail de '+${contact.firstName} + ' ' + ${contact.lastName}"></h1>
+<style>
+    table,
+td {
+    border: 1px solid #333;
+}
+thead,
+tfoot {
+    background-color: #333;
+    color: #fff;
+}
+
+
+
+</style>
+Adresse
+<table>
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Adresse</th>
+        <th>Supprimer l'adresse</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="m : ${contact.adresses}">
+        <td th:text="${m.id}">...</td>
+        <td th:text="${m.adresse}">...</td>
+        <td align="center">
+            <a th:onclick="'javascript:supprimeradresse(\''+ ${m.id}+','+${contact.id} + '\');'">
+                <button type="button">
+                    Supprimer
+                </button>
+            </a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<br><br>
+Email
+<table>
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Mail</th>
+        <th>Supprimer le mail</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="e : ${contact.emails}">
+        <td th:text="${e.id}">...</td>
+        <td th:text="${e.email}">...</td>
+        <td align="center">
+            <a th:onclick="'javascript:supprimeremail(\''+ ${e.id} +','+${contact.id}+ '\');'">
+                <button type="button">
+                    Supprimer
+                </button>
+            </a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<p th:onclick="'javascript:ajouteradresse(\''+ ${contact.id} + '\');'">
+    <button type="button">
+        Ajouter des adresses
+    </button>
+</p>
+<p th:onclick="'javascript:ajouteremail(\''+ ${contact.id} + '\');'">
+    <button type="button">
+        Ajouter des emails
+    </button>
+</p>
+<p th:onclick="'javascript:goaccueil();'">
+    <button type="button">
+        Accueil
+    </button>
+</p>
+</html>
