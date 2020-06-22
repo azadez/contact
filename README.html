@@ -24,7 +24,8 @@ foncionnalité :   voir la liste des contacts
                   supprimer un email/adresse d'un contact
                   ajouter 0, un ou des emails
                   ajouter 0, une ou des adresses
-                  
+                  correction de bug lors de la création d'email en double
+
                   tous les chemins se trouvent via des boutons, logout possible
 
 
@@ -40,6 +41,8 @@ xml?action=getContact&id=x    -> liste les informations du contact x
 xml?action=delContact&id=x    -> supprime le contact x avec ses emails et libère ses adresses
 xml?action=updateContact&firstname=a&lastname=b -> update un contact, possible de n'update que l'un, l'autre ou les deux parametres
 
+il est possible de mapper le xml pour faire des liaisons customer-adresse et customer-mail, mais sans avoir de liste sous les yeux ce n'est pas 
+très instinctif, l'api web avec le controller est beaucoup plus adapté (le principe de liaison est le même sur l'api xml que l'api web)
 
 injection xml par postman
 
