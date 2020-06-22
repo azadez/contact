@@ -234,8 +234,10 @@ public class GreetingController implements WebMvcConfigurer {
         }
         if (action.equals("delContact")) {
             if(data.existsById(Long.parseLong(x))){
+                Customer c = data.findById(Long.parseLong(x));
                 data.deleteById(Long.parseLong(x));
-                return null;
+                customer.getCustomer().add(c);
+                return customer;
             }return null;
         }
         if (action.equals("updateContact")) {
@@ -271,7 +273,7 @@ public class GreetingController implements WebMvcConfigurer {
     public ResponseEntity<Email> injectemail(@RequestBody Email email) {
         try {
             try {
-                Email _email = data3.save(new Email(email.getMail()));
+                Email _email = data3.save(new Email(email.getEmail()));
                 return new ResponseEntity<>(_email, HttpStatus.CREATED);
             } catch (Exception e) {
                 return new ResponseEntity<>(null, HttpStatus.CREATED);

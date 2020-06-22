@@ -3,6 +3,7 @@ package com.example.servingwebcontent.Model;
 
 import javax.persistence.*;
 import javax.transaction.Transactional;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -15,8 +16,9 @@ public class Email {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "Mail", unique = true)
-    private String Mail;
+    @Column(unique = true)
+    @NotNull
+    private String email;
 
 
     @ManyToOne
@@ -36,23 +38,23 @@ public class Email {
     }
 
     public Email(String Email) {
-        this.Mail = Email.replace(",", "");
+        this.email = Email.replace(",", "");
     }
 
     @XmlElement
-    public String getMail() {
-        return Mail;
+    public String getEmail() {
+        return email;
     }
 
-    public void setMail(String mail) {
-        Mail = mail;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     @Override
     public String toString() {
         return String.format(
                 "Email[id=%d, Email='%s']",
-                id, Mail);
+                id, email);
     }
     @XmlTransient
     public Customer getCustomer() {
