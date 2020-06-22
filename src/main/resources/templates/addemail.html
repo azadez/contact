@@ -9,7 +9,7 @@
 <form action="#" method="post" th:action="@{/addemail}" th:object="${emailForm}">
     <select multiple size="5" th:field="*{email}">
         <option th:each="c : ${email}"
-                th:text="${c.email}"
+                th:text="${c.mail}"
                 th:value="${c.id}"/>
     </select>
     <br>
